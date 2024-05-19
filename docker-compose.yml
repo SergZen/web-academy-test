@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_DATABASE=$DB_DATABASE
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+  db-creation:
+    build: .
+    image: app
+    command: npm run db:create
+    depends_on:
+      - mysqldb
+  migration:
+    build: .
+    image: app
+    command: npm run db:migrate
+    depends_on:
+      - db-creation
+  app:
+    build: .
+    command: npm start
+    depends_on:
+      - migration
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $PORT:3000
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:

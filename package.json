@@ -1,0 +1,27 @@
+{
+  "name": "web-academy-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "db:create": "npx sequelize-cli db:create",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "cors-express": "^0.2.2",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "email-validator": "^2.0.4",
+    "express": "^4.19.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mysql2": "^3.9.7",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.13",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
+}
